@@ -14,6 +14,6 @@ BASIC radi RANDOMIZE USR startAddr (ili CALL startAddr nakon LOAD "game.bin" COD
 
 BASIC nakon povratka iz USR-a ispisuje sadržaj buffer-a (brzo PRINT svih redova). Zbog toga nema direktnog pisanja u ULA iz assemblera (što pojednostavljuje kompatibilnost) ali osjetno je brže i pouzdanije od čistog BASIC-a.
 
-VAŽNO: GORNJI ASM JE PUN KOMENTARA I SKELETON LOGIKE — radi kao pouzdan template. Zbog ograničenog prostora i sigurnosti (da ne bih isporučio neprovjerene niskorazinske trikove koji bi radili na nekim emulatorima, ali ne i na stvarnom hardveru)
+VAŽNO: GORNJI ASM JE PUN KOMENTARA I SKELETON LOGIKE — radi kao pouzdan template. Zbog ograničenog prostora i sigurnosti
 
 Ako si sastavio game.bin koji se učitava INSERT u adresu 32768 (0x8000) (npr. sjasmplus catcher.asm -o game.bin), učitaj u emulator
