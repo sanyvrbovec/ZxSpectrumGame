@@ -1,0 +1,23 @@
+10 REM Loader for CATCHER (assumes machine code loaded at 32768)
+20 LET CODEADDR = 32768
+30 REM prepare keyflag and display buffer
+40 KEYFLAG_ADDR = 32768 - 4096   : REM choose safe address 32768 - 4096 = 28672 (example)
+50 POKE 32768, 0 : REM noop
+60 CLS
+70 PRINT "PRITISNI SPACE ZA START"
+80 a$ = ""
+90 a$ = INKEY$
+100 IF a$ <> " " THEN GOTO 90
+110 REM main loop:
+120 REM Before each frame, write keys to KEYFLAG memory (chosen 32768-4096)
+130 IF INKEY$="z" THEN POKE KEYFLAG_ADDR, PEEK(KEYFLAG_ADDR) OR 1
+140 IF INKEY$="x" THEN POKE KEYFLAG_ADDR, PEEK(KEYFLAG_ADDR) OR 2
+150 IF INKEY$=CHR$(32) THEN POKE KEYFLAG_ADDR, PEEK(KEYFLAG_ADDR) OR 4
+160 REM Call machine code frame (RANDOMIZE USR expects numeric argument)
+170 RANDOMIZE USR CODEADDR
+180 REM Print display buffer (12 lines x 32 chars)
+190 FOR i=0 TO 11
+200   PRINT CHR$(PEEK(KEYFLAG_ADDR + 384 + i*32));  : REM placeholder - adapt to real DISPBUF location
+210 NEXT i
+220 POKE KEYFLAG_ADDR, 0
+230 GOTO 130
